@@ -1,0 +1,43 @@
+﻿@model HRWeb.Models.department
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    @Html.Partial("~/Views/Partials/NavBar.cshtml")
+    <div>
+        <h4>department</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.department_name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.department_name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.location.street_address)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.location.street_address)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.department_id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

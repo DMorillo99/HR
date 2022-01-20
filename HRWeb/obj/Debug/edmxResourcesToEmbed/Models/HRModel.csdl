@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HRModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="country">
+    <Key>
+      <PropertyRef Name="country_id" />
+    </Key>
+    <Property Name="country_id" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="country_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="region_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="region" Relationship="Self.FK__countries__regio__3A81B327" FromRole="countries" ToRole="regions" />
+    <NavigationProperty Name="locations" Relationship="Self.FK__locations__count__403A8C7D" FromRole="countries" ToRole="locations" />
+  </EntityType>
+  <EntityType Name="department">
+    <Key>
+      <PropertyRef Name="department_id" />
+    </Key>
+    <Property Name="department_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="department_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="location_id" Type="Int32" />
+    <NavigationProperty Name="location" Relationship="Self.FK__departmen__locat__47DBAE45" FromRole="departments" ToRole="locations" />
+    <NavigationProperty Name="employees" Relationship="Self.FK__employees__depar__4F7CD00D" FromRole="departments" ToRole="employees" />
+  </EntityType>
+  <EntityType Name="dependent">
+    <Key>
+      <PropertyRef Name="dependent_id" />
+    </Key>
+    <Property Name="dependent_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="relationship" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="employee_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="employee" Relationship="Self.FK__dependent__emplo__534D60F1" FromRole="dependents" ToRole="employees" />
+  </EntityType>
+  <EntityType Name="employee">
+    <Key>
+      <PropertyRef Name="employee_id" />
+    </Key>
+    <Property Name="employee_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="first_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="last_name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="hire_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="job_id" Type="Int32" Nullable="false" />
+    <Property Name="salary" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="manager_id" Type="Int32" />
+    <Property Name="department_id" Type="Int32" />
+    <NavigationProperty Name="department" Relationship="Self.FK__employees__depar__4F7CD00D" FromRole="employees" ToRole="departments" />
+    <NavigationProperty Name="dependents" Relationship="Self.FK__dependent__emplo__534D60F1" FromRole="employees" ToRole="dependents" />
+    <NavigationProperty Name="job" Relationship="Self.FK__employees__job_i__4E88ABD4" FromRole="employees" ToRole="jobs" />
+    <NavigationProperty Name="employees1" Relationship="Self.FK__employees__manag__5070F446" FromRole="employees" ToRole="employees1" />
+    <NavigationProperty Name="employee1" Relationship="Self.FK__employees__manag__5070F446" FromRole="employees1" ToRole="employees" />
+  </EntityType>
+  <EntityType Name="job">
+    <Key>
+      <PropertyRef Name="job_id" />
+    </Key>
+    <Property Name="job_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="job_title" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="min_salary" Type="Decimal" Precision="8" Scale="2" />
+    <Property Name="max_salary" Type="Decimal" Precision="8" Scale="2" />
+    <NavigationProperty Name="employees" Relationship="Self.FK__employees__job_i__4E88ABD4" FromRole="jobs" ToRole="employees" />
+  </EntityType>
+  <EntityType Name="location">
+    <Key>
+      <PropertyRef Name="location_id" />
+    </Key>
+    <Property Name="location_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="street_address" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="postal_code" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="city" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="state_province" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="country_id" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="country" Relationship="Self.FK__locations__count__403A8C7D" FromRole="locations" ToRole="countries" />
+    <NavigationProperty Name="departments" Relationship="Self.FK__departmen__locat__47DBAE45" FromRole="locations" ToRole="departments" />
+  </EntityType>
+  <EntityType Name="region">
+    <Key>
+      <PropertyRef Name="region_id" />
+    </Key>
+    <Property Name="region_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="region_name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="countries" Relationship="Self.FK__countries__regio__3A81B327" FromRole="regions" ToRole="countries" />
+  </EntityType>
+  <Association Name="FK__countries__regio__3A81B327">
+    <End Role="regions" Type="Self.region" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="countries" Type="Self.country" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="regions">
+        <PropertyRef Name="region_id" />
+      </Principal>
+      <Dependent Role="countries">
+        <PropertyRef Name="region_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__locations__count__403A8C7D">
+    <End Role="countries" Type="Self.country" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="locations" Type="Self.location" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="countries">
+        <PropertyRef Name="country_id" />
+      </Principal>
+      <Dependent Role="locations">
+        <PropertyRef Name="country_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__departmen__locat__47DBAE45">
+    <End Role="locations" Type="Self.location" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="departments" Type="Self.department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="locations">
+        <PropertyRef Name="location_id" />
+      </Principal>
+      <Dependent Role="departments">
+        <PropertyRef Name="location_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__employees__depar__4F7CD00D">
+    <End Role="departments" Type="Self.department" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="employees" Type="Self.employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="departments">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="employees">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__dependent__emplo__534D60F1">
+    <End Role="employees" Type="Self.employee" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="dependents" Type="Self.dependent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employees">
+        <PropertyRef Name="employee_id" />
+      </Principal>
+      <Dependent Role="dependents">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__employees__job_i__4E88ABD4">
+    <End Role="jobs" Type="Self.job" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="employees" Type="Self.employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="jobs">
+        <PropertyRef Name="job_id" />
+      </Principal>
+      <Dependent Role="employees">
+        <PropertyRef Name="job_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__employees__manag__5070F446">
+    <End Role="employees" Type="Self.employee" Multiplicity="0..1" />
+    <End Role="employees1" Type="Self.employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employees">
+        <PropertyRef Name="employee_id" />
+      </Principal>
+      <Dependent Role="employees1">
+        <PropertyRef Name="manager_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HREntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="countries" EntityType="Self.country" />
+    <EntitySet Name="departments" EntityType="Self.department" />
+    <EntitySet Name="dependents" EntityType="Self.dependent" />
+    <EntitySet Name="employees" EntityType="Self.employee" />
+    <EntitySet Name="jobs" EntityType="Self.job" />
+    <EntitySet Name="locations" EntityType="Self.location" />
+    <EntitySet Name="regions" EntityType="Self.region" />
+    <AssociationSet Name="FK__countries__regio__3A81B327" Association="Self.FK__countries__regio__3A81B327">
+      <End Role="regions" EntitySet="regions" />
+      <End Role="countries" EntitySet="countries" />
+    </AssociationSet>
+    <AssociationSet Name="FK__locations__count__403A8C7D" Association="Self.FK__locations__count__403A8C7D">
+      <End Role="countries" EntitySet="countries" />
+      <End Role="locations" EntitySet="locations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__departmen__locat__47DBAE45" Association="Self.FK__departmen__locat__47DBAE45">
+      <End Role="locations" EntitySet="locations" />
+      <End Role="departments" EntitySet="departments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__employees__depar__4F7CD00D" Association="Self.FK__employees__depar__4F7CD00D">
+      <End Role="departments" EntitySet="departments" />
+      <End Role="employees" EntitySet="employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__dependent__emplo__534D60F1" Association="Self.FK__dependent__emplo__534D60F1">
+      <End Role="employees" EntitySet="employees" />
+      <End Role="dependents" EntitySet="dependents" />
+    </AssociationSet>
+    <AssociationSet Name="FK__employees__job_i__4E88ABD4" Association="Self.FK__employees__job_i__4E88ABD4">
+      <End Role="jobs" EntitySet="jobs" />
+      <End Role="employees" EntitySet="employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__employees__manag__5070F446" Association="Self.FK__employees__manag__5070F446">
+      <End Role="employees" EntitySet="employees" />
+      <End Role="employees1" EntitySet="employees" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

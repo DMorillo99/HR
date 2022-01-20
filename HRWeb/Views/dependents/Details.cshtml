@@ -1,0 +1,59 @@
+﻿@model HRWeb.Models.dependent
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    @Html.Partial("~/Views/Partials/NavBar.cshtml")
+    <div>
+        <h4>dependent</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.first_name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.first_name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.last_name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.last_name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.relationship)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.relationship)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.employee.first_name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.employee.first_name)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.dependent_id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

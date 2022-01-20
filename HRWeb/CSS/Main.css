@@ -1,0 +1,123 @@
+﻿body {
+    padding: 0;
+    margin: 0;
+    font-family: Roboto;
+}
+
+.header {
+    padding: 10%;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+    font-size: 90px;
+    background-image: url("https://d3kqdc25i4tl0t.cloudfront.net/articles/content/502_985232_operations.hero.jpg");
+}
+
+
+.middleContent {
+    padding: 1%;
+    text-align: justify;
+    background: #1abc9c;
+    color: white;
+    font-size: 30px;
+    margin-top: 5%;
+}
+
+    .middleContent h1 {
+        text-align: center;
+    }
+
+    .middleContent p {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+.card {
+    margin-top: 1%;
+}
+
+    .card:hover {
+        box-shadow: 5px 10px 10px 1px;
+    }
+
+
+table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    /*table-layout: fixed;*/
+}
+
+    table caption {
+        font-size: 1.5em;
+        margin: .5em 0 .75em;
+    }
+
+    table tr {
+        border: 1px solid #ddd;
+        padding: .35em;
+    }
+
+    table th,
+    table td {
+        padding: .625em;
+        text-align: center;
+        font-size: 1.3em;
+    }
+
+    table th {
+        font-size: 1.3em;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+    }
+
+@media screen and (max-width: 991px) {
+    table {
+        border: 0;
+    }
+
+        table caption {
+            font-size: 1.3em;
+        }
+
+        table thead {
+            border: none;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+
+        table tr {
+            border-bottom: 3px solid #ddd;
+            display: block;
+            margin-bottom: .625em;
+        }
+
+        table td {
+            border-bottom: 1px solid #ddd;
+            display: block;
+            font-size: 2.10em;
+            text-align: right;
+        }
+
+            table td::before {
+                /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+                content: attr(data-label);
+                float: left;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+
+            table td:last-child {
+                border-bottom: 0;
+            }
+}

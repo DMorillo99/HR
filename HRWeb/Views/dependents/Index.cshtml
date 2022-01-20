@@ -1,0 +1,61 @@
+﻿@model IEnumerable<HRWeb.Models.dependent>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @Html.Partial("~/Views/Partials/NavBar.cshtml")
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.first_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.last_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.relationship)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.employee.first_name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.first_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.last_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.relationship)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.employee.first_name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.dependent_id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.dependent_id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.dependent_id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

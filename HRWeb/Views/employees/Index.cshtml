@@ -1,0 +1,95 @@
+﻿@model IEnumerable<HRWeb.Models.employee>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Lista de Empleados</title>
+</head>
+<body>
+    @Html.Partial("~/Views/Partials/NavBar.cshtml")
+    <div class="mx-auto" style="width: 200px;">
+        <br />
+        @Html.ActionLink("Registrar Nuevo Empleado", "Create", null, new { @class = "btn btn-primary btn-lg" })
+        <br />
+        <br />
+    </div>
+    <div table-responsive-sm style="overflow-x:auto;">
+        <table class="table table-hover table-dark">
+            <thead >
+                <tr>
+                    <th scope="col">
+                        <h7>Nombre</h7>
+                    </th>
+                    <th scope="col">
+                        <h7>Apellido</h7>
+                    </th>
+                    <th scope="col">
+                        <h7>Email</h7>
+                    </th>
+                    <th scope="col">
+                        <h7>Telefono</h7>
+                    </th>
+                    <th scope="col">
+                        <h7>Contratacion</h7>
+                    </th>
+                    <th scope="col">
+                        <h7>Salario</h7>
+                    </th>
+                    <th scope="col">
+                        <h7>Departamento</h7>
+                    </th>
+                    <th scope="col">
+                        <h7>Trabajo</h7>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody >
+                @foreach (var item in Model)
+                {
+                    <tr >
+                        <td data-label="Nombre">
+                            @Html.DisplayFor(modelItem => item.first_name)
+                        </td>
+                        <td data-label="Apellido">
+                            @Html.DisplayFor(modelItem => item.last_name)
+                        </td>
+                        <td data-label="Email">
+                            @Html.DisplayFor(modelItem => item.email)
+                        </td>
+                        <td data-label="Telefono">
+                            @Html.DisplayFor(modelItem => item.phone_number)
+                        </td>
+                        <td data-label="Contratacion">
+                            @Html.DisplayFor(modelItem => item.hire_date)
+                        </td>
+                        <td data-label="Salario">
+                            @Html.DisplayFor(modelItem => item.salary)
+                        </td>
+                        <td data-label="Departamento">
+                            @Html.DisplayFor(modelItem => item.department.department_name)
+                        </td>
+                        <td data-label="Trabajo">
+                            @Html.DisplayFor(modelItem => item.job.job_title)
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-lg" role="group" aria-label="Botones de control">
+                                @Html.ActionLink("Modificar", "Edit", new { id = item.employee_id }, new {@class="btn btn-primary" })
+                                @Html.ActionLink("Detalles", "Details", new { id = item.employee_id }, new { @class = "btn btn-info" })
+                                @Html.ActionLink("Eliminar", "Delete", new { id = item.employee_id }, new { @class = "btn btn-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

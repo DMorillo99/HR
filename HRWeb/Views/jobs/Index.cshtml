@@ -1,0 +1,62 @@
+﻿@model IEnumerable<HRWeb.Models.job>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Titulos Profesionales</title>
+</head>
+<body>
+    @Html.Partial("~/Views/Partials/NavBar.cshtml")
+    <div class="mx-auto" style="width: 200px;">
+        <br />
+        @Html.ActionLink("Registrar Nuevo Titulo Profesional", "Create", null, new { @class = "btn btn-primary btn-lg" })
+        <br />
+        <br />
+    </div>
+        <div table-responsive-sm style="overflow-x:auto;">
+            <table class="table table-hover table-dark">
+                <tr>
+                    <th scope="col">
+                        <h7>Titulo Profesional</h7>
+                    </th>
+                    <th scope="col">
+                        <h7>Salario Minimo</h7>
+                    </th>
+                    <th scope="col">
+                        <h7>Salario Maximo</h7>
+                    </th>
+                    <th></th>
+                </tr>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td data-label="Titulo Profesional">
+                                @Html.DisplayFor(modelItem => item.job_title)
+                            </td>
+                            <td data-label="Salario Minimo">
+                                @Html.DisplayFor(modelItem => item.min_salary)
+                            </td>
+                            <td data-label="Salario Maximo">
+                                @Html.DisplayFor(modelItem => item.max_salary)
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-lg" role="group" aria-label="Botones de control">
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.job_id }, new { @class = "btn btn-primary" })
+                                    @Html.ActionLink("Details", "Details", new { id = item.job_id }, new { @class = "btn btn-info" })
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.job_id }, new { @class = "btn btn-danger" })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+</body>
+</html>
